@@ -6,7 +6,7 @@
 
 `TwitterHashmoji` gives you powerful functions to generate complex animations based on your input views.  You can just pass a single `Image` and witout any custom animation to achieve a graceful animation which just the same like effect as Twitter in your app. 
 
-`TwitterHashmoji` is written totally by `SwiftUI` which means you can use this package in all platform. ``TwitterHashmoji` is a botton view with basic Twitter hashmoji animation. Just with serval lines of code you can achieve complex animations you like.
+`TwitterHashmoji` is written totally by `SwiftUI` which means you can use this package in all platform. `TwitterHashmoji` is a botton view with basic Twitter hashmoji animation. Just with serval lines of code you can achieve complex animations you like.
 
 The image below shows [#Paimon's](https://twitter.com/hashmojis/status/1691652717582639168) like effect animation.
 
