@@ -31,10 +31,6 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
     @State private var bottonTapped: Bool = false
     /// 初始状态下与Image缩小之后隐藏Image使用
     @State private var hideImage: Bool = true
-    @State private var _width: CGFloat?
-    private var width: CGFloat {
-        (_width == nil) ? 50 : _width!
-    }
     /// 点击heart后的动画持续时间，包括heart突然消失与图片的突然出现
     private let tapReactionTimer: Seconds = 0.01
     /// 图片放大持续时间
@@ -74,6 +70,7 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
         self.hashmojiViewType = .view
     }
     /// 初始一个HashMoji按钮
+    /// 如果content本身就是一个Image,此时在使用的时候无需添加.resizable()方法
     public init(onTapGesture: (() -> Void)?, onDismiss: (() -> Void)?, content: () -> HashmojiView) where HashmojiView == Image {
         self.content = content()
         self.onTapGesture = onTapGesture
@@ -86,6 +83,7 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
         self.hashmojiViewType = .view
     }
     /// 初始一个HashMoji按钮
+    /// 如果content本身就是一个Image,此时在使用的时候无需添加.resizable()方法
     public init(content: () -> HashmojiView) where HashmojiView == Image {
         self.content = content()
         self.hashmojiViewType = .image
@@ -108,7 +106,6 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
                    .opacity(self.hideImage ? 0 : 1)
             }
              
-            
             Button(action: {
                 isLike ? unlike() : like()
             }, label: {
@@ -118,18 +115,8 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
                     .foregroundColor(self.isLike ? .darkPink : .gray)
                     .opacity(self.showReadHeart ? 1: self.bottonTapped ? 0 : 1)
                     .scaleEffect(heartScaleRate.rawValue)
-                    //.frame(width: width, height: width, alignment: .center)
             })
         }
-//        .background(
-//            GeometryReader(content: { geometry in
-//                Color.clear
-//                    .preference(key: WidthKey.self, value: geometry.size.width)
-//            })
-//        )
-//        .onPreferenceChange(WidthKey.self, perform: { value in
-//            self._width = value
-//        })
     }
 }
 
@@ -182,13 +169,6 @@ extension HashmojiButton {
                 onDismiss()
             }
         }
-    }
-}
-
-fileprivate struct WidthKey: PreferenceKey {
-    static let defaultValue: CGFloat? = nil
-    static func reduce(value: inout CGFloat?,nextValue: () -> CGFloat?) {
-        value = value ?? nextValue()
     }
 }
 
