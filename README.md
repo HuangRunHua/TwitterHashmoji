@@ -31,7 +31,7 @@ Add the dependency to any targets you've declared in your manifest:
 ),
 ```
 
-To display the `hashmoji` button simply use `HashmojiButton(content:)` , supplying a `View` or `Image`
+To display the `HashmojiButton` button simply use `HashmojiButton(content:)` , supplying a `View` or `Image`
 
 ```swift
 import SwiftUI
