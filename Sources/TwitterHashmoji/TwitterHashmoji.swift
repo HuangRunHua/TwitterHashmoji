@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// 一个搭载Twitter Hashmoji点赞动画的按钮。
 public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
     typealias Seconds = CGFloat
     /// 设定Image的缩放规则
@@ -62,15 +63,20 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
     public var onTapGesture: (() -> Void)? = nil
     /// 取消按钮触发的动作
     public var onDismiss: (() -> Void)? = nil
-    /// 初始一个HashMoji按钮
+    /// 初始一个`HashMoji`按钮
+    /// - Parameter onTapGesture: 点击按钮时候触发的事件。注意该事件将会在`DispatchQueue.main.async`中被调用。
+    /// - Parameter onDismiss: 取消触发的事件。注意该事件将会在`DispatchQueue.main.async`中被调用。
+    /// - Parameter content: 自定义视图，该视图为一个遵循`View`协议的实例对象。
     public init(onTapGesture: (() -> Void)?, onDismiss: (() -> Void)?, content: () -> HashmojiView) {
         self.content = content()
         self.onTapGesture = onTapGesture
         self.onDismiss = onDismiss
         self.hashmojiViewType = .view
     }
-    /// 初始一个HashMoji按钮
-    /// 如果content本身就是一个Image,此时在使用的时候无需添加.resizable()方法
+    /// 初始一个`HashMoji`按钮
+    /// - Parameter onTapGesture: 点击按钮时候触发的事件。注意该事件将会在`DispatchQueue.main.async`中被调用。
+    /// - Parameter onDismiss: 取消触发的事件。注意该事件将会在`DispatchQueue.main.async`中被调用。
+    /// - Parameter content: 自定义视图，该视图为一个`Image`实例对象，此时在使用的时候无需添加`.resizable()`方法。
     public init(onTapGesture: (() -> Void)?, onDismiss: (() -> Void)?, content: () -> HashmojiView) where HashmojiView == Image {
         self.content = content()
         self.onTapGesture = onTapGesture
@@ -78,12 +84,13 @@ public struct HashmojiButton<HashmojiView>: View where HashmojiView: View {
         self.hashmojiViewType = .image
     }
     /// 初始一个HashMoji按钮
+    /// - Parameter content: 自定义视图，该视图为一个遵循`View`协议的实例对象。
     public init(content: () -> HashmojiView) {
         self.content = content()
         self.hashmojiViewType = .view
     }
     /// 初始一个HashMoji按钮
-    /// 如果content本身就是一个Image,此时在使用的时候无需添加.resizable()方法
+    /// - Parameter content: 自定义视图，该视图为一个`Image`实例对象，此时在使用的时候无需添加`.resizable()`方法。
     public init(content: () -> HashmojiView) where HashmojiView == Image {
         self.content = content()
         self.hashmojiViewType = .image
